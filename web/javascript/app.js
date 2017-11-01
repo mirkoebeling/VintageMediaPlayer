@@ -149,7 +149,6 @@ function playVideo(event, ui){
 	document.getElementById("Video").style.display = "block";
 }
 
-
 function popupInfoText(title,infohtml){
 	if (debug) { console.log("### popupInfoText start ###"); }
 
