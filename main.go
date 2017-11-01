@@ -14,7 +14,7 @@ import (
 	//"sort"
 	//"runtime/debug"
 	"os"
-	"regexp"
+	//"regexp"
 
 	"gopkg.in/igm/sockjs-go.v2/sockjs"
 	//"strconv"
@@ -38,7 +38,6 @@ var PublishTickertime time.Duration = 100 // default 100
 
 var (
 	host          = flag.String("host", ":8080", "specifies Host and Port.")
-	ips           = flag.String("ips", "^.*?$", "specifies IP regex")
 	debuglevel    = flag.Bool("debug", false, "enable debugging")
 	audioPath     = flag.String("audiopath", "/home/pi/Music", "path to the Musik files")
 	videoPath     = flag.String("videopath", "/home/pi/Videos", "path to the Video files")
@@ -79,7 +78,6 @@ func VideoList(path string) []os.FileInfo {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("Test\n")
 	for _, file := range files {
 		if file.IsDir() {
 			VideoList(path + "/" + file.Name())
@@ -92,24 +90,20 @@ func VideoList(path string) []os.FileInfo {
 }
 
 func handleWebside(w http.ResponseWriter, req *http.Request) {
-	match, _ := regexp.MatchString(*ips, strings.Split(req.RemoteAddr, ":")[0])
-	if match {
-		URL := "web" + req.URL.String()
-		if URL == "web/" {
-			URL = "web/index.html"
-		}
-		if isValueInList(URL, WebContentURL) > -1 {
-			WebContentPos := isValueInList(URL, WebContentURL)
-			WebContentTmpbase64 := WebContent[WebContentPos]
-			WebContentTmp, _ := base64.StdEncoding.DecodeString(WebContentTmpbase64)
-			mType := mime.TypeByExtension(filepath.Ext(URL))
-			w.Header().Set("Content-Type", mType)
-			fmt.Fprint(w, string(WebContentTmp[:]))
-		}
-	} else {
-		w.WriteHeader(403)
+	URL := "web" + req.URL.String()
+	if URL == "web/" {
+		URL = "web/index.html"
+	}
+	if isValueInList(URL, WebContentURL) > -1 {
+		WebContentPos := isValueInList(URL, WebContentURL)
+		WebContentTmpbase64 := WebContent[WebContentPos]
+		WebContentTmp, _ := base64.StdEncoding.DecodeString(WebContentTmpbase64)
+		mType := mime.TypeByExtension(filepath.Ext(URL))
+		w.Header().Set("Content-Type", mType)
+		fmt.Fprint(w, string(WebContentTmp[:]))
 	}
 }
+
 func setNameIndex(nameIndex []NameIndex, Name string, Index int) []NameIndex {
 	for i, n := range nameIndex {
 		if n.Name == Name {
@@ -128,7 +122,6 @@ func getMediaData() MediaData {
 
 			splitFileName := strings.Split(f.Name()[0:len(f.Name())-4], " - ")
 			splitFileName = append(splitFileName, "k.a.", "k.a.", "k.a.")
-
 			mediaData.VideoData.Mediainfos = append(mediaData.VideoData.Mediainfos, MediaInfo{f.Name(), splitFileName[0], splitFileName[1], splitFileName[2]})
 			mediaData.VideoData.Interpreten = setNameIndex(mediaData.VideoData.Interpreten, splitFileName[0], len(mediaData.VideoData.Mediainfos))
 			mediaData.VideoData.Stile = setNameIndex(mediaData.VideoData.Stile, splitFileName[2], len(mediaData.VideoData.Mediainfos))

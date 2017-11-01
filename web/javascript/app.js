@@ -20,13 +20,9 @@ $( function(){
   	});
 	
   	$( "#VideoPrevButton" ).button({
-        //icon: "ui-icon-caret-1-w",
-        //showLabel: false,
 		label: "zurück"
   	}).hide();
   	$( "#VideoNextButton" ).button({
-        //icon: "ui-icon-caret-1-e",
-        //showLabel: false,
 		label: "weiter"
   	}).hide();
   	
@@ -76,7 +72,28 @@ $( function(){
 		document.getElementById("rockabillyradio").style.display = "none";
 		document.getElementById("menuButtons").style.display = "none";
   	});
+  	$( "#Button-randomVideo" ).on( "click", function( event, ui ) {
+		document.getElementById("randomVideoButtons").style.display = "block";
+		document.getElementById("videoButtons").style.display = "none";
+		document.getElementById("rockabillyradio").style.display = "none";
+		document.getElementById("menuButtons").style.display = "none";
+  	});
+  	$( "#Button-randomVideoBack" ).on( "click", function( event, ui ) {
+		document.getElementById("randomVideoButtons").style.display = "none";
+		document.getElementById("videoButtons").style.display = "none";
+		document.getElementById("rockabillyradio").style.display = "none";
+		document.getElementById("menuButtons").style.display = "block";
+  	});
 } );
+function setMenuView(MenuID){
+	document.getElementById("randomVideoButtons").style.display = "none";
+	document.getElementById("videoButtons").style.display = "none";
+	document.getElementById("rockabillyradio").style.display = "none";
+	document.getElementById("menuButtons").style.display = "none";
+	
+}
+
+
 function VideoPrevButton(){
 	if (debug) { console.log("### VideoPrevButton start ###"); }
 	$("#videoButtonPage-"+videoPage).hide();	
@@ -102,9 +119,6 @@ function VideoNextButton(){
 	if (videoPage>1){
 		$( "#VideoPrevButton" ).button().show();
 	}
-	//console.log("videoPage#:");
-	//console.log(videoPage);
-	
 }
 
 function videoZurueck(event, ui){
