@@ -39,50 +39,36 @@ $( function(){
  	//$(".menuButton").button();
   	$( "#Video" ).on( "click", function( event) {
 		if (debug) { console.log("### click on SelectedVideo start ###"); }
-		document.getElementById("videoButtons").style.display = "block";
+		setMenuView("videoButtons");
 		document.getElementById("SelectedVideo").pause();
-		document.getElementById("Video").style.display = "none";
 	} );
   	$( "#Video" ).on( "select", function( event) {
 		if (debug) { console.log("### select SelectedVideo start ###"); }
-		document.getElementById("videoButtons").style.display = "block";
+		setMenuView("videoButtons");
 		document.getElementById("SelectedVideo").pause();
-		document.getElementById("Video").style.display = "none";
 	} );
   	$( "#Video" ).on( "ended", function( event) {
 		if (debug) { console.log("### select SelectedVideo start ###"); }
-		document.getElementById("videoButtons").style.display = "block";
-		document.getElementById("Video").style.display = "none";
+		setMenuView("videoButtons");
 	} );
   	$( "#Button-radio" ).on( "click", function( event, ui ) {
-		document.getElementById("menuButtons").style.display = "none";
-		document.getElementById("rockabillyradio").style.display = "block";
+		setMenuView("rockabillyradio");
 	  	 $("#rockabillyradio").html('<object width=100% height=600 data="http://rockabilly-radio.net/"></object>');
   	} );
   	$( ".zurueckButton" ).on( "click", function( event, ui ) {
-		document.getElementById("videoButtons").style.display = "none";
-		document.getElementById("rockabillyradio").style.display = "none";
-		document.getElementById("menuButtons").style.display = "block";
+		setMenuView("menuButtons");
   	} );
   	$( "#Button-selectVideo" ).on( "click", function( event, ui ) {
 		if (videoPages>1){
 			$( "#VideoNextButton" ).button().show();
 		}
-		document.getElementById("videoButtons").style.display = "block";
-		document.getElementById("rockabillyradio").style.display = "none";
-		document.getElementById("menuButtons").style.display = "none";
+		setMenuView("videoButtons");
   	});
   	$( "#Button-randomVideo" ).on( "click", function( event, ui ) {
-		document.getElementById("randomVideoButtons").style.display = "block";
-		document.getElementById("videoButtons").style.display = "none";
-		document.getElementById("rockabillyradio").style.display = "none";
-		document.getElementById("menuButtons").style.display = "none";
+		setMenuView("randomVideoButtons");
   	});
   	$( "#Button-randomVideoBack" ).on( "click", function( event, ui ) {
-		document.getElementById("randomVideoButtons").style.display = "none";
-		document.getElementById("videoButtons").style.display = "none";
-		document.getElementById("rockabillyradio").style.display = "none";
-		document.getElementById("menuButtons").style.display = "block";
+		setMenuView("menuButtons");
   	});
 } );
 function setMenuView(MenuID){
@@ -90,6 +76,7 @@ function setMenuView(MenuID){
 	document.getElementById("videoButtons").style.display = "none";
 	document.getElementById("rockabillyradio").style.display = "none";
 	document.getElementById("menuButtons").style.display = "none";
+	document.getElementById(MenuID).style.display = "block";
 	
 }
 
