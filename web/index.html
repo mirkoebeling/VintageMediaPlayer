@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Cache-Control" content="no-cache"	/>
+	<meta http-equiv="Cache-control" content="max-age=0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<title>Video und MP3 Player</title>
+	<link rel="shortcut icon" href="/music.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="style/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="style/Style.css" />
+	<link rel="icon" href="/music.ico" type="image/x-icon">
+	<link rel="shortcut icon" type="image/x-icon" href="/music.ico">
+	<script type="text/javascript" src="javascript/sockjs.min.js"></script>
+	<script type="text/javascript" src="javascript/d3.v3.min.js"></script>
+	<script type="text/javascript" src="javascript/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="javascript/jquery-ui.js"></script>
+	<script type="text/javascript" src="javascript/app.js"></script>
+</head>
+<body id="body">
+	<div style="display: none" id="InfoPopUp" title="Dialog Title"></div>
+	<div id=menuButtons >
+		<Button class=Reload><br><br></Button>
+	   	<Button id=Dialog class="menuButton jbb-1">InfoPopUp<br><br></Button>
+	   	<Button id=Button-radio class="menuButton jbb-2">Rockabilly<br>Radio</Button>
+	   	<Button id=Button-randomVideo class="menuButton jbb-3">Videos zufällige<br>abspielen</Button>
+	   	<Button id=Button-selectVideo class="menuButton jbb-4">Video<br>auswählen</Button>
+	   	<Button id=Button-randomAudio class="menuButton jbb-5">Audios zufällige<br>abspielen</Button>
+	   	<Button id=Button-selectAudio class="menuButton jbb-6">Audio<br>auswählen</Button>
+   	</div>
+	<div style="display: none" id="videoButtons">
+		<Button class=Reload><br><br></Button>
+		<div id="videoButtonPages"></div>
+		<Button id=VideoPrevButton><br><br></Button>
+		<Button id=VideoNextButton><br><br></Button>
+		<div id=VideoPageView></div>
+	</div>
+	</div>
+	<div id="rockabillyradio"></div>
+   	<div id="Video" style="display: none"></div>
+   	<div id="info"></div>
+</body>
+</html>
